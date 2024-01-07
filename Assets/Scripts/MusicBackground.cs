@@ -10,9 +10,9 @@ public class MusicBackground : MonoBehaviour {
     }
 
     private void Update() {
-        if(PlayerPrefs.GetString("music") == "Yes" && !_audioSource.isPlaying)
+        if (PlayerPrefs.GetString("music") == "Yes" && !_audioSource.isPlaying)
             _audioSource.Play();
-        else if(PlayerPrefs.GetString("music") == "No" && _audioSource.isPlaying)
+        else if (PlayerPrefs.GetString("music") == "No" && _audioSource.isPlaying) 
             _audioSource.Stop();
     }
 }

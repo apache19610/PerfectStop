@@ -20,7 +20,7 @@ public class Blinker : MonoBehaviour {
 
     private void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player") && other.transform.localPosition.x == -15) {
-            GameObject.Find("Game Controller").GetComponent<GameController>().needToTurnCarRight = true;
+            GameObject.Find("GameController").GetComponent<GameController>().needToTurnCarRight = true;
         }
     }
 }

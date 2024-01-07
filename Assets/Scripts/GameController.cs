@@ -9,13 +9,7 @@ using System.Runtime.InteropServices;
 public class GameController : MonoBehaviour {
 
     [DllImport("__Internal")]
-    private static extern void ShowAdv();
-
-    [DllImport("__Internal")]
     private static extern void AddCoinsExtern();
-
-    //[DllImport("__Internal")]
-    //private static extern void SetToLeaderBoard(int value);
 
     public Text coinsText, nowScore, topScore;
     public GameObject[] canvasButtons;
@@ -67,7 +61,6 @@ public class GameController : MonoBehaviour {
         topScoreSave = PlayerPrefs.GetInt("Score");
         topScore.text = "Лучший счёт: " + topScoreSave;
         //SetToLeaderBoard(topScoreSave);
-        ShowAdv();
     }
 
     private void Update() {
@@ -143,8 +136,21 @@ public class GameController : MonoBehaviour {
         }
 
         if (Barrier.isLose && !canvasButtons[0].activeSelf) {
-            foreach (GameObject btn in canvasButtons)
-                btn.SetActive(true);
+            GetComponent<AudioSource>().volume = 0;
+            if (parkedCars > 0) 
+            {
+                for (int i = 0; i < canvasButtons.Length ; i++) 
+                {
+                    canvasButtons[i].SetActive(true);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < canvasButtons.Length - 1; i++) 
+                {
+                    canvasButtons[i].SetActive(true);
+                }
+            }
         }
 
         if (Input.GetMouseButtonDown(0) || Input.touchCount > 0) {
@@ -276,7 +282,7 @@ public class GameController : MonoBehaviour {
         newObj.transform.SetParent(roadParent);
     }
 
-    public void BoznagrazdenieZaProsmotrReklami()
+    public void AddCoins()
     {
         if (parkedCars > 0)
         {
@@ -284,7 +290,17 @@ public class GameController : MonoBehaviour {
             coinsText.text = nowCoins.ToString();
             PlayerPrefs.SetInt("Coins", nowCoins);
         }
-        AddCoinsExtern();
     }
 
+    public void ShowAdvButton()
+    {
+        if (parkedCars > 0)
+        {
+            nowCoins = PlayerPrefs.GetInt("Coins") + (parkedCars * 2) - parkedCars;
+            coinsText.text = nowCoins.ToString();
+            PlayerPrefs.SetInt("Coins", nowCoins);
+        }
+        canvasButtons[3].SetActive(false);
+        AddCoinsExtern();
+    }
 }

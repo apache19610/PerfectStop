@@ -1,18 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Runtime.InteropServices;
 
 public class WhichCarSelected : MonoBehaviour {
-
-    [DllImport("__Internal")]
-    private static extern void ShowAdv();
-
     public Image[] checkButtons;
     public Sprite closeImage, checkImage;
-    
+
     private void Start() {
         CheckButtons();
-        ShowAdv();
     }
 
     public void CheckButtons() {

@@ -10,11 +10,12 @@ YaGames.init().then(ysdk => ysdk.adv.showFullscreenAdv({
     callbacks: {
     	onOpen: () => {
           console.log('Video ad open.');
-          myGameInstance.SendMessage("GameController", "OpenAdv");
+
+          myGameInstance.SendMessage("Yandex", "OpenAdv");
         },
         onClose: function(wasShown) {
       	  console.log('Video ad closed.');
-          myGameInstance.SendMessage("GameController", "CloseAdv");
+          myGameInstance.SendMessage("Yandex", "CloseAdv");
 
         },
         onError: function(error) {
@@ -30,15 +31,15 @@ YaGames.init().then(ysdk => ysdk.adv.showRewardedVideo({
     callbacks: {
         onOpen: () => {
           console.log('Video ad open.');
-          myGameInstance.SendMessage("GameController", "OpenAdv");
+          myGameInstance.SendMessage("Yandex", "OpenAdv");
         },
         onRewarded: () => {
-          
+          console.log('Video onRewarded.');
+         myGameInstance.SendMessage("GameController", "AddCoins");
         },
         onClose: () => {
           console.log('Video ad closed.');
-          myGameInstance.SendMessage("GameController", "CloseAdv");
-          myGameInstance.SendMessage("GameController", "BoznagrazdenieZaProsmotrReklami");
+          myGameInstance.SendMessage("Yandex", "CloseAdv");
         }, 
         onError: (e) => {
           console.log('Error while open video ad:', e);

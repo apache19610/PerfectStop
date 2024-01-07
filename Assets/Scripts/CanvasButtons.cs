@@ -8,12 +8,13 @@ public class CanvasButtons : MonoBehaviour {
 
     public Sprite btn, btnPressed, musicOn, musicOff;
     private Image _image;
+    public static bool isOpen;
 
     private void Start() {
         _image = GetComponent<Image>();
         
 
-        if (gameObject.name == "Music Button") {
+        if (gameObject.name == "MusicButton") {
             if (PlayerPrefs.GetString("music") == "No")
                 transform.GetChild(0).GetComponent<Image>().sprite = musicOff;
         }
@@ -24,10 +25,12 @@ public class CanvasButtons : MonoBehaviour {
         if (PlayerPrefs.GetString("music") == "No") { // Turn on
             PlayerPrefs.SetString("music", "Yes");
             transform.GetChild(0).GetComponent<Image>().sprite = musicOn;
+            isOpen = true;
         }
         else { // Turn off
             PlayerPrefs.SetString("music", "No");
             transform.GetChild(0).GetComponent<Image>().sprite = musicOff;
+            isOpen = false;
         }
     }
 
@@ -71,4 +74,5 @@ public class CanvasButtons : MonoBehaviour {
         if (PlayerPrefs.GetString("music") != "No")
             GetComponent<AudioSource>().Play();
     }
+
 }
